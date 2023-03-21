@@ -1,30 +1,16 @@
 using System;
 
-class MainClass
+class RockPaperScissors
 {
-    static void RunGame() {
-        var random = new Random();
-        string[] choices = { "rock", "paper", "scissors" };
-        Console.Write("Enter your choice (rock, paper, scissors): ");
-        string playerChoice = Console.ReadLine().ToLower();
-        if (!Array.Exists(choices, x => x == playerChoice)) RunGame();
-        int computerChoiceIndex = random.Next(choices.Length);
-        Console.WriteLine($"You chose {playerChoice}, computer chose {choices[computerChoiceIndex]}.");
-        if (playerChoice == choices[computerChoiceIndex]) Console.WriteLine("It's a tie!");
-        else if ((playerChoice == "rock" && choices[computerChoiceIndex] == "scissors") || (playerChoice == "paper" && choices[computerChoiceIndex] == "rock") || (playerChoice == "scissors" && choices[computerChoiceIndex] == "paper")) Console.WriteLine("You win!");
-        else Console.WriteLine("Computer wins!");
-        Console.Write("Do you want to play again? (y/n): ");
-        if (Console.ReadLine().ToLower() == "y") RunGame();
-        else Console.WriteLine("Thanks for playing!");
-    }
-    static void Main() {
-        RunGame();
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Choose one of the three: 1 = Rock 2 = Paper 3 = Scissors");
+        int player;
+        while (!int.TryParse(Console.ReadLine(), out player) || player < 1 || player > 3)
+            Console.WriteLine("choose out of three Are you stupid or what? 1 = Rock 2 = Paper 3 = Scissors");
+        int computer = new Random().Next(1, 4);
+        Console.WriteLine(player == computer ? "You got tied!" : player % 3 + 1 == computer ? "You won!" : "Computer won!");
+        Console.WriteLine("Press any key to exit.");
+        Console.ReadKey();
     }
 }
-
-//This code is much shorter by removing unnecessary code. 
-//Having the logic into a single recursive function Play(). However i sacrificed alot of readability 
-// this was primarly reason it took so long to make because i kept getting lost within the code but it works 
-
-
-
